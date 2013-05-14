@@ -1,0 +1,2 @@
+version=3
+https://github.com/georgmartius/vid.stab/tags .*/(?:release-)?(\d[\d\.]*)\.tar\.gz

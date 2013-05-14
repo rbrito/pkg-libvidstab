@@ -1,0 +1,23 @@
+Source: libvidstab
+Priority: optional
+Maintainer: Rogério Brito <rbrito@ime.usp.br>
+Build-Depends: debhelper (>= 9), cmake
+Standards-Version: 3.9.4
+Section: libs
+Homepage: <insert the upstream URL, if relevant>
+#Vcs-Git: git://git.debian.org/collab-maint/libvidstab.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/libvidstab.git;a=summary
+
+Package: libvidstab-dev
+Section: libdevel
+Architecture: any
+Depends: libvidstabBROKEN (= ${binary:Version})
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
+
+Package: libvidstabBROKEN
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>

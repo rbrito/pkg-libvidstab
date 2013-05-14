@@ -1,0 +1,5 @@
+libvidstab (0.96-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Rogério Brito <rbrito@ime.usp.br>  Tue, 14 May 2013 04:34:52 -0300
