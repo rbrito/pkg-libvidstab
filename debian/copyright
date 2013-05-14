@@ -3,7 +3,7 @@ Upstream-Name: libvidstab
 Source: https://github.com/georgmartius/vid.stab
 
 Files: *
-Copyright: 2010-2013 Georg Martius <georg dot martius at web dot de> 
+Copyright: 2010-2013 Georg Martius <georg dot martius at web dot de>
 License: GPL-2.0+
 
 Files: debian/*
