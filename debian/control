@@ -29,7 +29,7 @@ Description: video stabilization library (development files)
  .
  This package contains the development files of vid.stab.
 
-Package: libvidstabBROKEN
+Package: libvidstab1
 Section: libs
 Architecture: any
 Depends:
