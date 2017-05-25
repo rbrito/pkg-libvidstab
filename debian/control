@@ -7,6 +7,8 @@ Build-Depends:
 Standards-Version: 3.9.4
 Section: libs
 Homepage: http://public.hronopik.de/vid.stab/
+Vcs-Browser: https://github.com/rbrito/pkg-libvidstab
+Vcs-Git: https://github.com/rbrito/pkg-libvidstab
 
 Package: libvidstab-dev
 Section: libdevel
