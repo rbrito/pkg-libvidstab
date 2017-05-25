@@ -6,7 +6,7 @@ Build-Depends:
  debhelper (>= 10)
 Standards-Version: 3.9.4
 Section: libs
-Homepage: <insert the upstream URL, if relevant>
+Homepage: http://public.hronopik.de/vid.stab/
 
 Package: libvidstab-dev
 Section: libdevel
