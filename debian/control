@@ -14,6 +14,7 @@ Package: libvidstab-dev
 Section: libdevel
 Architecture: any
 Depends:
+ ${misc:Depends},
  libvidstab0.9 (= ${binary:Version})
 Description: video stabilization library (development files)
  Imagine you captured a nice video with your camcorder, compact camera or
