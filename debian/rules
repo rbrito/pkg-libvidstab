@@ -2,12 +2,12 @@
 %:
 	dh $@ 
 
-override_dh_auto_configure:
-	mkdir -p src/cmake
-	cd src/cmake && cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
+# override_dh_auto_configure:
+# 	mkdir -p src/cmake
+# 	cd src/cmake && cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
 
-override_dh_auto_build:
-	cd src/cmake && $(MAKE)
+# override_dh_auto_build:
+# 	cd src/cmake && $(MAKE)
 
-override_dh_install:
-	cd src/cmake && $(MAKE) DESTDIR=$$(pwd)/../debian/libvstab install
+# override_dh_install:
+# 	cd src/cmake && $(MAKE) DESTDIR=$$(pwd)/../debian/libvstab install
