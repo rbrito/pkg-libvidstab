@@ -1,6 +1,6 @@
-libvidstab (0.98-1~1.gbpcb5387) UNRELEASED; urgency=medium
+libvidstab (0.98-1~2.gbp8d5669) UNRELEASED; urgency=medium
 
-  ** SNAPSHOT build @cb5387a25f9792515f8ddf43e85f4cdd0f308455 **
+  ** SNAPSHOT build @8d56694327b7ee4840fa19096f5e6fe381ab8497 **
 
   * Use a simple pass of wrap-and-sort.
   * debian/rules: Add changes that will be dropped for next upstream version.
@@ -10,8 +10,12 @@ libvidstab (0.98-1~1.gbpcb5387) UNRELEASED; urgency=medium
   * debian/control: Add Vcs-* fields.
   * debian/control: Add proper short and long descriptions.
   * debian/libvidstab-dev.dirs: Run wrap-and-sort -s -a -v.
+  * debian/rules: Fix grave spaces vs. tab on makefile.
+  * debian/rules: Ignore the custom rules for the moment.
+  * debian/control: Fix SONAME in shared library.
+  * debian/*.install: Adapt for multiarch locations.
 
- -- Rogério Brito <rbrito@ime.usp.br>  Wed, 24 May 2017 22:52:31 -0300
+ -- Rogério Brito <rbrito@ime.usp.br>  Wed, 24 May 2017 23:04:21 -0300
 
 libvidstab (0.96-1) unstable; urgency=low
 
