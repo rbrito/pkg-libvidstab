@@ -27,108 +27,69 @@
 #define VIDSTABDEFINES_H_
 
 #include <stddef.h>
+#include <stdlib.h>
 
-#define VS_MAX(a, b)		(((a) > (b)) ?(a) :(b))
-#define VS_MIN(a, b)		(((a) < (b)) ?(a) :(b))
+#ifdef __GNUC__
+#define likely(x)       __builtin_expect(!!(x), 1)
+#define unlikely(x)     __builtin_expect(!!(x), 0)
+#else
+#define likely(x)        (x)
+#define unlikely(x)      (x)
+#endif
+
+#define VS_MAX(a, b)    (((a) > (b)) ?(a) :(b))
+#define VS_MIN(a, b)    (((a) < (b)) ?(a) :(b))
 /* clamp x between a and b */
-#define VS_CLAMP(x, a, b)	VS_MIN(VS_MAX((a), (x)), (b))
+#define VS_CLAMP(x, a, b)  VS_MIN(VS_MAX((a), (x)), (b))
 
 #define VS_DEBUG 2
 
 /// pixel in single layer image
-#define PIXEL(img, x, y, w, h, def) ((x) < 0 || (y) < 0) ? (def)	\
-  : (((x) >= (w) || (y) >= (h)) ? (def) : img[(x) + (y) * (w)])
+#define PIXEL(img, linesize, x, y, w, h, def) \
+  (((x) < 0 || (y) < 0 || (x) >= (w) || (y) >= (h)) ? (def) : img[(x) + (y) * (linesize)])
 /// pixel in single layer image without rangecheck
-#define PIX(img, x, y, w, h) (img[(x) + (y) * (w)])
+#define PIX(img, linesize, x, y) (img[(x) + (y) * (linesize)])
 /// pixel in N-channel image. channel in {0..N-1}
-#define PIXELN(img, x, y, w, h, N,channel , def) ((x) < 0 || (y) < 0) ? (def) \
-  : (((x) >=(w) || (y) >= (h)) ? (def) : img[((x) + (y) * (w))*(N) + (channel)])
+#define PIXELN(img, linesize, x, y, w, h, N, channel, def) \
+  (((x) < 0 || (y) < 0 || (x) >= (w) || (y) >= (h)) ? (def) : img[((x) + (y) * (linesize))*(N) + (channel)])
 /// pixel in N-channel image without rangecheck. channel in {0..N-1}
-#define PIXN(img, x, y, w, h, N,channel) (img[((x) + (y) * (w))*(N) + (channel)])
+#define PIXN(img, linesize, x, y, N, channel) (img[((x) + (y) * (linesize))*(N) + (channel)])
 
+/**** Configurable memory and logging functions. Defined in libvidstab.c ****/
 
-// define here the functions to be used in the framework we are in
-// for transcode
-#ifdef TRANSCODE
-#include <transcode.h>
-#define vs_malloc(size) tc_malloc(size)
-#define vs_zalloc(size) tc_zalloc(size)
-#define vs_realloc(ptr, size) tc_realloc(ptr, size)
-#define vs_free(ptr) tc_free(ptr)
+typedef void* (*vs_malloc_t) (size_t size);
+typedef void* (*vs_realloc_t) (void* ptr, size_t size);
+typedef void (*vs_free_t) (void* ptr);
+typedef void* (*vs_zalloc_t) (size_t size);
 
-#define vs_log_error(tag, format, args...) \
-    tc_log(TC_LOG_ERR, tag, format , ## args)
-#define vs_log_info(tag, format, args...) \
-    tc_log(TC_LOG_INFO, tag, format , ## args)
-#define vs_log_warn(tag, format, args...) \
-    tc_log(TC_LOG_WARN, tag, format , ## args)
-#define vs_log_msg(tag, format, args...) \
-    tc_log(TC_LOG_MSG, tag, format , ## args)
+typedef int (*vs_log_t) (int type, const char* tag, const char* format, ...);
 
-#define vs_strdup(s) tc_strdup(s)
-#define vs_strndup(s, n) tc_strndup(s, n)
+typedef char* (*vs_strdup_t) (const char* s);
 
-#define VS_ERROR TC_ERROR
-#define VS_OK TC_OK
+extern vs_log_t vs_log;
 
+extern vs_malloc_t vs_malloc;
+extern vs_realloc_t vs_realloc;
+extern vs_free_t vs_free;
+extern vs_zalloc_t vs_zalloc;
 
-#else
-#ifdef LIBAVFILTER // libavfilter library
+extern vs_strdup_t vs_strdup;
 
-#include <libavutil/log.h>
-#include <libavutil/mem.h>
-extern void* pctx;
+extern int VS_ERROR_TYPE;
+extern int VS_WARN_TYPE;
+extern int VS_INFO_TYPE;
+extern int VS_MSG_TYPE;
 
-#define vs_malloc(size) av_malloc(size)
-#define vs_zalloc(size) av_mallocz(size)
-#define vs_realloc(ptr, size) av_realloc(ptr, size)
-#define vs_free(ptr) av_free(ptr)
+extern int VS_ERROR;
+extern int VS_OK;
 
 #define vs_log_error(tag, format, args...) \
-	av_log(pctx, AV_LOG_ERROR, tag, format , ## args)
-#define vs_log_info(tag, format, args...) \
-	av_log(pctx, AV_LOG_INFO, tag, format , ## args)
+    vs_log(VS_ERROR_TYPE, tag, format , ## args)
 #define vs_log_warn(tag, format, args...) \
-	av_log(pctx, AV_LOG_WARN, tag, format , ## args)
-#define vs_log_msg(tag, format, args...) \
-	av_log(pctx, AV_LOG_VERBOSE, tag, format , ## args)
-
-#define vs_strdup(s) av_strdup(s)
-#define vs_strndup(s, n) av_strndup(s, n)
-
-#define VS_ERROR 0
-#define VS_OK 1
-
-#else
- // standard C framework
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define vs_malloc(size) (void*)malloc(size)
-#define vs_realloc(ptr, size) (void*)realloc(ptr, size)
-#define vs_free(ptr) free(ptr)
-#define vs_zalloc(size) memset(malloc(size),0,size)
-
-#define vs_log(type, tag, format, args...) \
-	{ fprintf(stderr,"%s (%s):", type, tag); fprintf(stderr,format, ## args); \
-	  fprintf(stderr,"\n"); }
-
-#define vs_log_error(tag, format, args...) \
-    vs_log("Error:", tag, format , ## args)
+    vs_log(VS_WARN_TYPE, tag, format , ## args)
 #define vs_log_info(tag, format, args...) \
-    vs_log("Info: ", tag, format , ## args)
-#define vs_log_warn(tag, format, args...) \
-    vs_log("Warn: ", tag, format , ## args)
+    vs_log(VS_INFO_TYPE, tag, format , ## args)
 #define vs_log_msg(tag, format, args...) \
-    vs_log("Msg:  ", tag, format , ## args)
-
-#define vs_strdup(s) strdup(s)
-#define vs_strndup(s, n) strndup(s, n)
-
-#define VS_ERROR -1
-#define VS_OK 0
-#endif // frameworks
-#endif // frameworks
-
+    vs_log(VS_MSG_TYPE, tag, format , ## args)
 
 #endif /* VIDSTABDEFINES_H_ */
