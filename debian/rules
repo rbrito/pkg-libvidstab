@@ -10,4 +10,4 @@ override_dh_auto_build:
 	cd src/cmake && $(MAKE)
 
 override_dh_install:
-        cd src/cmake && $(MAKE) DESTDIR=$$(pwd)/../debian/libvstab install
+	cd src/cmake && $(MAKE) DESTDIR=$$(pwd)/../debian/libvstab install
