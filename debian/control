@@ -3,7 +3,7 @@ Priority: optional
 Maintainer: Rogério Brito <rbrito@ime.usp.br>
 Build-Depends:
  cmake,
- debhelper (>= 9)
+ debhelper (>= 10)
 Standards-Version: 3.9.4
 Section: libs
 Homepage: <insert the upstream URL, if relevant>
