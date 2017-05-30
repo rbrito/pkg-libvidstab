@@ -1,6 +1,6 @@
-libvidstab (0.98-1~3.gbp9c3a45) UNRELEASED; urgency=medium
+libvidstab (1.0.0-1~4.gbp270b62) UNRELEASED; urgency=medium
 
-  ** SNAPSHOT build @9c3a450fd484f066708bb7f177ee521796eee4cc **
+  ** SNAPSHOT build @270b62d07919c810e2779883ebfc46afe9d67500 **
 
   * Use a simple pass of wrap-and-sort.
   * debian/rules: Add changes that will be dropped for next upstream version.
@@ -20,8 +20,11 @@ libvidstab (0.98-1~3.gbp9c3a45) UNRELEASED; urgency=medium
   * debian/control: Remove redundant field.
   * debian/*.install: Revert the multi-arch paths.
   * debian/libvidstab*.install: Rename to be consistent with SONAME.
+  * debian/rules: Remove unused lines.
+  * debian/watch: Update to version 4 to fix detection of new releases.
+  * New upstream version 1.0.0
 
- -- Rogério Brito <rbrito@ime.usp.br>  Thu, 25 May 2017 00:13:55 -0300
+ -- Rogério Brito <rbrito@ime.usp.br>  Mon, 29 May 2017 22:43:22 -0300
 
 libvidstab (0.96-1) unstable; urgency=low
 
