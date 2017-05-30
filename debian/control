@@ -15,7 +15,7 @@ Section: libdevel
 Architecture: any
 Depends:
  ${misc:Depends},
- libvidstab0.9 (= ${binary:Version})
+ libvidstab1.1 (= ${binary:Version})
 Description: video stabilization library (development files)
  Imagine you captured a nice video with your camcorder, compact camera or
  even cell phone while skiing, cycling or whatever sports and the video is
@@ -30,7 +30,7 @@ Description: video stabilization library (development files)
  .
  This package contains the development files of vid.stab.
 
-Package: libvidstab0.9
+Package: libvidstab1.1
 Architecture: any
 Depends:
  ${misc:Depends},
