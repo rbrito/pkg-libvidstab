@@ -16,10 +16,10 @@ includedir=\${prefix}/include
 Name: ${name}
 Description: ${desc}
 Version: ${VIDSTAB_VERSION}
-Libs: -L\${libdir} -l${name}
+Libs: -L\${libdir} -l${name} ${PKG_EXTRA_LIBS}
 Cflags: -I\${includedir}
 
 ")
 
-    install(FILES ${_pkgfname} DESTINATION lib/pkgconfig)
+    install(FILES ${_pkgfname} DESTINATION lib${LIB_SUFFIX}/pkgconfig)
 endmacro()
