@@ -1,2 +1,4 @@
-version=3
-https://github.com/georgmartius/vid.stab/tags .*/(?:release-)?(\d[\d\.]*)\.tar\.gz
+version=4
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%vid.stab-$1.tar.gz%" \
+    https://github.com/georgmartius/vid.stab/tags \
+    (?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian uupdate
