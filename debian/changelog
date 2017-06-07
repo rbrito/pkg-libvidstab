@@ -1,30 +1,30 @@
-libvidstab (1.0.0-1~4.gbp270b62) UNRELEASED; urgency=medium
+libvidstab (1.0.0-1) unstable; urgency=medium
 
-  ** SNAPSHOT build @270b62d07919c810e2779883ebfc46afe9d67500 **
-
-  * Use a simple pass of wrap-and-sort.
   * debian/rules: Add changes that will be dropped for next upstream version.
   * New upstream version 0.98
   * debian/{compat,control}: Update debhelper compat to 10.
-  * debian/control: Add upstream homepage.
-  * debian/control: Add Vcs-* fields.
-  * debian/control: Add proper short and long descriptions.
-  * debian/libvidstab-dev.dirs: Run wrap-and-sort -s -a -v.
-  * debian/rules: Fix grave spaces vs. tab on makefile.
-  * debian/rules: Ignore the custom rules for the moment.
-  * debian/control: Fix SONAME in shared library.
-  * debian/*.install: Adapt for multiarch locations.
-  * debian: Remove unused files.
-  * debian/control: Fix SONAME of the library.
-  * debian/control: Add misc-depends, since we are using debhelper.
-  * debian/control: Remove redundant field.
-  * debian/*.install: Revert the multi-arch paths.
+  * debian/control:
+    + Add upstream homepage.
+    + Add Vcs-* fields.
+    + Add proper short and long descriptions.
+    + Fix SONAME in shared library.
+    + Add misc-depends, since we are using debhelper.
+    + Remove redundant field from previous packaging versions.
+  * debian:
+    + Normalize with `wrap-and-sort -s -a -v`.
+  * debian/rules:
+    + Fix grave bug with respect to spaces vs. tab on makefile.
+    + Ignore the custom rules for the moment.
   * debian/libvidstab*.install: Rename to be consistent with SONAME.
-  * debian/rules: Remove unused lines.
-  * debian/watch: Update to version 4 to fix detection of new releases.
+  * debian/watch:
+    + Update to version 4 to fix detection of new releases.
   * New upstream version 1.0.0
+  * debian/docs:
+    + Change from README to README.md to follow upstream.
+  * debian/{control,libvidstat1.1.install}:
+    + Fix for new SONAME.
 
- -- Rogério Brito <rbrito@ime.usp.br>  Mon, 29 May 2017 22:43:22 -0300
+ -- Rogério Brito <rbrito@ime.usp.br>  Wed, 07 Jun 2017 19:47:43 -0300
 
 libvidstab (0.96-1) unstable; urgency=low
 
